@@ -79,12 +79,6 @@ export default function Login() {
             <label htmlFor="password" className={labelClass}>
               Password
             </label>
-            <Link
-              to="/forgot-password"
-              className="text-sm font-medium text-[#0F6B5C] underline-offset-4 hover:underline focus-visible:underline"
-            >
-              Forgot password?
-            </Link>
           </div>
           <div className="relative">
             <input
