@@ -5,7 +5,7 @@ import { Eye, EyeOff } from "lucide-react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 
-import { registerSchema, type RegisterFormValues } from "../type";
+import { registerSchema, type RegisterFormValues } from "../types/type";
 import { signUp } from "../services/authService";
 import { setSession } from "../authSlice";
 

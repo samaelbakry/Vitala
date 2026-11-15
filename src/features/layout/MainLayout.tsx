@@ -1,4 +1,5 @@
 import { navigation } from "@/constants/sibebar";
+import { QueryClient } from "@tanstack/react-query";
 import { LogOut, PanelLeftClose, PanelLeftOpen } from "lucide-react";
 import { NavLink, Outlet, useNavigate } from "react-router-dom";
 import { toast } from "sonner";
@@ -11,24 +12,30 @@ import { clearAuth } from "../auth/authSlice";
 export default function MainLayout() {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
+  const queryClient = new QueryClient()
 
   const user = useAppSelector((state) => state.auth.user);
   const sidebarOpen = useAppSelector((state) => state.ui.sidebarOpen);
 
   const userInitial = user?.email?.charAt(0).toUpperCase() || "V";
 
-  const handleLogout = async () => {
-    try {
-      const { error } = await supabase.auth.signOut();
-      if (error) throw error;
+ const handleLogout = async () => {
+  try {
+    const { error } = await supabase.auth.signOut();
 
-      dispatch(clearAuth());
-      toast.success("Signed out successfully");
-      navigate("/login", { replace: true });
-    } catch {
-      toast.error("Unable to sign out");
-    }
-  };
+    if (error) throw error;
+
+    queryClient.clear();
+
+    dispatch(clearAuth());
+
+    toast.success("Signed out successfully");
+
+    navigate("/login", { replace: true });
+  } catch {
+    toast.error("Unable to sign out");
+  }
+};
 
   return (
     <div className="min-h-screen bg-[#F5F8F7] text-[#0E2A2B] flex selection:bg-[#3DDC97]/30">

@@ -1,22 +1,16 @@
-
 import type { ReactNode } from "react";
 import { Provider } from "react-redux";
 
-import {
-  QueryClient,
-  QueryClientProvider,
-} from "@tanstack/react-query";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
-import {
-  ReactQueryDevtools,
-} from "@tanstack/react-query-devtools";
+import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 
 import { store } from "./store";
 import AuthInitializer from "../features/auth/components/AuthInitializer";
 
 type ProvidersProps = {
   children: ReactNode;
-}
+};
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -33,7 +27,7 @@ const queryClient = new QueryClient({
   },
 });
 
-export default function Providers({ children}: ProvidersProps) {
+export default function Providers({ children }: ProvidersProps) {
   return (
     <Provider store={store}>
       <QueryClientProvider client={queryClient}>

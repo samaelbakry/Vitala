@@ -5,12 +5,12 @@ import { Eye, EyeOff } from "lucide-react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 
-import { loginSchema, type LoginFormValues } from "../type";
 import { signIn } from "../services/authService";
 import { setSession } from "../authSlice";
 
 import { toast } from "sonner";
 import { useAppDispatch } from "../../../app/store";
+import { loginSchema, type LoginFormValues } from "../types/type";
 
 const inputClass =
   "w-full border-0 border-b-2 border-[#D3DEDB] bg-transparent px-0 py-3 text-base text-[#0E2A2B] placeholder:text-[#8FA5A2] outline-none transition-colors focus:border-[#0E2A2B] focus-visible:border-[#0E2A2B]";
