@@ -7,6 +7,7 @@ import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 
 import { store } from "./store";
 import AuthInitializer from "../features/auth/components/AuthInitializer";
+import { Toaster } from "sonner";
 
 type ProvidersProps = {
   children: ReactNode;
@@ -32,9 +33,8 @@ export default function Providers({ children }: ProvidersProps) {
     <Provider store={store}>
       <QueryClientProvider client={queryClient}>
         <AuthInitializer />
-
+        <Toaster/>
         {children}
-
         <ReactQueryDevtools initialIsOpen={false} />
       </QueryClientProvider>
     </Provider>

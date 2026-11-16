@@ -1,3 +1,4 @@
+
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
@@ -13,9 +14,10 @@ import { toast } from "sonner";
 import { useAppDispatch } from "../../../app/store";
 
 const inputClass =
-  "w-full border-0 border-b-2 border-[#D3DEDB] bg-transparent px-0 py-3 text-base text-[#0E2A2B] placeholder:text-[#8FA5A2] outline-none transition-colors focus:border-[#0E2A2B] focus-visible:border-[#0E2A2B]";
-const labelClass = "block text-sm font-medium text-[#0E2A2B]";
-const errorClass = "mt-1.5 text-sm text-[#B42318]";
+  "w-full border-0 border-b-2 border-[#E9DCE3] bg-transparent px-0 py-3 text-base text-[#35263A] placeholder:text-[#B09BAA] outline-none transition-colors focus:border-[#935073] focus-visible:border-[#935073]";
+
+const labelClass = "block text-sm font-medium text-brand-800";
+const errorClass = "mt-1.5 text-sm text-[#C75B68]";
 
 export default function Register() {
   const navigate = useNavigate();
@@ -24,7 +26,11 @@ export default function Register() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
 
-  const { register, handleSubmit, formState: { errors } } = useForm<RegisterFormValues>({
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<RegisterFormValues>({
     resolver: zodResolver(registerSchema),
   });
 
@@ -56,18 +62,24 @@ export default function Register() {
 
   return (
     <div className="w-full max-w-md">
-      <h1 className="auth-display text-4xl font-bold text-[#0E2A2B]">
+      <h1 className="auth-display text-4xl font-bold text-brand-950">
         Create your account
       </h1>
-      <p className="mt-3 text-[#5B7270]">
+
+      <p className="mt-3 text-brand-700">
         Set up Vitala for your clinic in a minute.
       </p>
 
-      <form onSubmit={handleSubmit(onSubmit)} className="mt-10 space-y-6" noValidate>
+      <form
+        onSubmit={handleSubmit(onSubmit)}
+        className="mt-10 space-y-6"
+        noValidate
+      >
         <div>
           <label htmlFor="fullName" className={labelClass}>
             Full name
           </label>
+
           <input
             id="fullName"
             {...register("fullName")}
@@ -76,6 +88,7 @@ export default function Register() {
             aria-invalid={!!errors.fullName}
             className={inputClass}
           />
+
           {errors.fullName && (
             <p className={errorClass}>{errors.fullName.message}</p>
           )}
@@ -85,6 +98,7 @@ export default function Register() {
           <label htmlFor="email" className={labelClass}>
             Email address
           </label>
+
           <input
             id="email"
             {...register("email")}
@@ -94,7 +108,10 @@ export default function Register() {
             aria-invalid={!!errors.email}
             className={inputClass}
           />
-          {errors.email && <p className={errorClass}>{errors.email.message}</p>}
+
+          {errors.email && (
+            <p className={errorClass}>{errors.email.message}</p>
+          )}
         </div>
 
         <div className="grid gap-6 sm:grid-cols-2">
@@ -102,6 +119,7 @@ export default function Register() {
             <label htmlFor="password" className={labelClass}>
               Password
             </label>
+
             <div className="relative">
               <input
                 id="password"
@@ -112,15 +130,21 @@ export default function Register() {
                 aria-invalid={!!errors.password}
                 className={`${inputClass} pr-10`}
               />
+
               <button
                 type="button"
                 onClick={() => setShowPassword((v) => !v)}
-                aria-label={showPassword ? "Hide passwords" : "Show passwords"}
-                className="absolute right-0 top-1/2 -translate-y-1/2 rounded p-1 text-[#5B7270] hover:text-[#0E2A2B] focus-visible:outline focus-visible:outline-2 focus-visible:outline-[#0F6B5C]"
+                aria-label={showPassword ? "Hide password" : "Show password"}
+                className="absolute right-0 top-1/2 -translate-y-1/2 rounded p-1 text-[#935073] transition-colors hover:text-brand-800 focus-visible:outline focus-visible:outline-[#935073]"
               >
-                {showPassword ? <EyeOff className="h-5 w-5" aria-hidden="true" /> : <Eye className="h-5 w-5" aria-hidden="true" />}
+                {showPassword ? (
+                  <EyeOff className="h-5 w-5" aria-hidden="true" />
+                ) : (
+                  <Eye className="h-5 w-5" aria-hidden="true" />
+                )}
               </button>
             </div>
+
             {errors.password && (
               <p className={errorClass}>{errors.password.message}</p>
             )}
@@ -130,6 +154,7 @@ export default function Register() {
             <label htmlFor="confirmPassword" className={labelClass}>
               Confirm password
             </label>
+
             <input
               id="confirmPassword"
               {...register("confirmPassword")}
@@ -139,6 +164,7 @@ export default function Register() {
               aria-invalid={!!errors.confirmPassword}
               className={inputClass}
             />
+
             {errors.confirmPassword && (
               <p className={errorClass}>{errors.confirmPassword.message}</p>
             )}
@@ -148,17 +174,17 @@ export default function Register() {
         <button
           type="submit"
           disabled={isSubmitting}
-          className="w-full rounded-full bg-[#0E2A2B] py-3.5 font-semibold text-white transition-colors hover:bg-[#143d3f] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#0F6B5C] disabled:cursor-not-allowed disabled:opacity-50"
+          className="w-full rounded-full bg-brand-800 py-3.5 font-semibold text-[#F8F4E9] transition-all hover:bg-brand-700 focus-visible:outline focus-visible:outline-offset-2 focus-visible:outline-[#935073] disabled:cursor-not-allowed disabled:opacity-50"
         >
           {isSubmitting ? "Creating account..." : "Create account"}
         </button>
       </form>
 
-      <p className="mt-8 text-sm text-[#5B7270]">
+      <p className="mt-8 text-sm text-[#806D7D]">
         Already have an account?{" "}
         <Link
           to="/login"
-          className="font-semibold text-[#0F6B5C] underline-offset-4 hover:underline"
+          className="font-semibold text-[#935073] underline-offset-4 transition-colors hover:text-brand-800 hover:underline"
         >
           Sign in
         </Link>

@@ -1,13 +1,24 @@
+
 import { createSlice, type PayloadAction } from "@reduxjs/toolkit";
+
+type Theme = "light" | "dark";
 
 type UIState = {
   sidebarOpen: boolean;
-  theme: "light" | "dark";
+  theme: Theme;
+};
+
+const getInitialTheme = (): Theme => {
+  if (typeof window === "undefined") return "light";
+
+  const savedTheme = localStorage.getItem("vitala-theme");
+
+  return savedTheme === "dark" ? "dark" : "light";
 };
 
 const initialState: UIState = {
   sidebarOpen: true,
-  theme: "light",
+  theme: getInitialTheme(),
 };
 
 const uiSlice = createSlice({
@@ -23,12 +34,21 @@ const uiSlice = createSlice({
       state.sidebarOpen = action.payload;
     },
 
-    setTheme: (state, action: PayloadAction<"light" | "dark">) => {
+    setTheme: (state, action: PayloadAction<Theme>) => {
       state.theme = action.payload;
+    },
+
+    toggleTheme: (state) => {
+      state.theme = state.theme === "light" ? "dark" : "light";
     },
   },
 });
 
-export const { toggleSidebar, setSidebarOpen, setTheme } = uiSlice.actions;
+export const {
+  toggleSidebar,
+  setSidebarOpen,
+  setTheme,
+  toggleTheme,
+} = uiSlice.actions;
 
 export default uiSlice.reducer;

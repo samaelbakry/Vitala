@@ -10,7 +10,7 @@ export default function ProtectedRoute() {
   if (!isInitialized) {
     return (
       <div className="min-h-screen flex items-center justify-center">
-        <div className="animate-spin h-8 w-8 rounded-full border-4 border-teal-700 border-t-transparent" />
+        <div className="animate-spin size-8 rounded-full border-4 border-brand-700 border-t-transparent" />
       </div>
     );
   }

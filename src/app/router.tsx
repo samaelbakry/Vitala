@@ -8,7 +8,7 @@ import MainLayout from "../features/layout/MainLayout";
 import DashboardPage from "../features/dashboard/pages/DashboardPage";
 import NoAccessPage from "@/components/shared/NoAccessPage";
 import UnauthorizedPage from "@/components/shared/UnauthorizedPage";
-import MembershipGuard from "@/features/routes/MembershipGuide";
+import MembershipGuard from "@/features/routes/MembershipGuard";
 import RoleGuard from "@/features/routes/RoleGuard";
 
 export const router = createBrowserRouter([

@@ -1,6 +1,6 @@
 import { useAppSelector } from "@/app/store";
+import { getMyMemberships } from "@/features/clinic/services/clinic.services";
 import { useQuery } from "@tanstack/react-query";
-import { getMyMemberships } from "../services/authService";
 
 export function useMyMemberships() {
   const userId = useAppSelector((state) => state.auth.user?.id);

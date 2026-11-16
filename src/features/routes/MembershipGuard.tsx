@@ -13,7 +13,7 @@ export default function MembershipGuard() {
   if (isPending) {
     return (
       <div className="min-h-screen grid place-items-center">
-        <div className="h-8 w-8 animate-spin rounded-full border-4 border-teal-700 border-t-transparent" />
+        <div className="size-8 animate-spin rounded-full border-4 border-brand-700 border-t-transparent" />
       </div>
     );
   }
@@ -28,7 +28,7 @@ export default function MembershipGuard() {
 
           <button
             onClick={() => refetch()}
-            className="rounded-lg bg-teal-700 px-5 py-2 text-white"
+            className="rounded-lg bg-brand-700 px-5 py-2 text-white"
           >
             Retry
           </button>

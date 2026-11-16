@@ -1,12 +1,14 @@
 import { configureStore } from "@reduxjs/toolkit";
 import { useDispatch, useSelector } from "react-redux";
 import authSlice from "../features/auth/authSlice";
-import uiReducer from "../components/ui/uiSlice";
+import uiSlice from "../components/ui/uiSlice";
+import clinicSlice from "@/features/clinic/clinicSlice";
 
 export const store = configureStore({
   reducer: {
     auth: authSlice,
-    ui: uiReducer,
+    ui: uiSlice,
+    clinic:clinicSlice
   },
 });
 

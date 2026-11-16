@@ -8,16 +8,3 @@ export type MembershipStatus =
   | "invited"
   | "suspended";
 
-export type ClinicMembership = {
-  id: string;
-  clinic_id: string;
-  user_id: string;
-  role: UserRole;
-  status: MembershipStatus;
-  created_at: string;
-
-  clinic: {
-    id: string;
-    name: string;
-  };
-}
