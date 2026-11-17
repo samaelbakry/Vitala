@@ -1,44 +1,31 @@
 import { Navigate, Outlet } from "react-router-dom";
 
-import { useMyMemberships } from "@/features/auth/hooks/useMyMemberships";
+import { useActiveClinic } from "../clinic/hooks/useActiveClinic";
 
 export default function MembershipGuard() {
-  const {
-    data: memberships,
-    isPending,
-    isError,
-    refetch,
-  } = useMyMemberships();
+  const { hasActiveClinic, isPending, isError, error } = useActiveClinic();
 
   if (isPending) {
     return (
-      <div className="min-h-screen grid place-items-center">
-        <div className="size-8 animate-spin rounded-full border-4 border-brand-700 border-t-transparent" />
+      <div className="flex min-h-[60vh] items-center justify-center">
+        <div className="h-8 w-8 animate-spin rounded-full border-2 border-brand-300/30 border-t-brand-700 dark:border-t-brand-300" />
       </div>
     );
   }
 
   if (isError) {
     return (
-      <div className="min-h-screen grid place-items-center">
-        <div className="text-center">
-          <p className="mb-4 text-red-600">
-            Failed to load clinic membership.
-          </p>
-
-          <button
-            onClick={() => refetch()}
-            className="rounded-lg bg-brand-700 px-5 py-2 text-white"
-          >
-            Retry
-          </button>
-        </div>
+      <div className="flex min-h-[60vh] flex-col items-center justify-center gap-2 text-center">
+        <p className="text-sm font-medium text-foreground">
+          Unable to load your clinic membership.
+        </p>
+        <p className="text-xs text-muted-foreground">{error?.message}</p>
       </div>
     );
   }
 
-  if (!memberships?.length) {
-    return <Navigate to="/no-access" replace />;
+  if (!hasActiveClinic) {
+    return <Navigate to="/onboarding" replace />;
   }
 
   return <Outlet />;

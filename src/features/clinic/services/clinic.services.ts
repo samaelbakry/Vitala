@@ -27,3 +27,19 @@ export async function getMyMemberships(userId: string): Promise<ClinicMembership
 
   return (data ?? []) as unknown as ClinicMembership[];
 }
+
+export async function createClinic(name: string): Promise<string> {
+  const { data, error } = await supabase.rpc("create_clinic", {
+    _name: name.trim(),
+  });
+
+  if (error) {
+    throw new Error(error.message);
+  }
+
+  if (!data) {
+    throw new Error("Failed to create clinic");
+  }
+
+  return data;
+}

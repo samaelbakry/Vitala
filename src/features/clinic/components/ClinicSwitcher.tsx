@@ -31,7 +31,7 @@ export default function ClinicSwitcher({
 
   if (isPending) {
     return (
-      <div className="mx-3 my-4 h-14 animate-pulse rounded-2xl border border-white/[0.06] bg-white/[0.04]" />
+      <div className="mx-3 my-4 h-14 animate-pulse rounded-2xl border border-white/6 bg-white/4" />
     );
   }
 
@@ -66,7 +66,7 @@ export default function ClinicSwitcher({
         value={activeClinic.name}
         onValueChange={handleClinicChange}
       >
-        <SelectTrigger className="group h-auto min-h-[62px] w-full rounded-2xl border border-white/[0.09] bg-white/[0.045] px-3 py-2.5 text-brand-100 shadow-[inset_0_1px_0_rgba(255,255,255,0.04)] backdrop-blur-xl transition-all hover:border-brand-300/30 hover:bg-white/[0.075] focus:ring-1 focus:ring-brand-300/30 [&>svg]:text-brand-300/70">
+        <SelectTrigger className="group h-auto min-h-15.5 w-full rounded-2xl border border-white/9 bg-white/4.5 px-3 py-2.5 text-brand-100 shadow-[inset_0_1px_0_rgba(255,255,255,0.04)] backdrop-blur-xl transition-all hover:border-brand-300/30 hover:bg-white/7.5 focus:ring-1 focus:ring-brand-300/30 [&>svg]:text-brand-300/70">
           <div className="flex min-w-0 items-center gap-3">
             <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl border border-brand-300/20 bg-brand-300/10 text-brand-300 transition-colors group-hover:bg-brand-300/15">
               <Building2 size={18} strokeWidth={1.6} />
@@ -84,7 +84,7 @@ export default function ClinicSwitcher({
 
         <SelectContent
           align="start"
-          className="w-[var(--radix-select-trigger-width)] rounded-xl border border-border/80 bg-popover/95 p-1.5 shadow-xl backdrop-blur-2xl"
+          className="w-(--radix-select-trigger-width) rounded-xl border border-border/80 bg-popover/95 p-1.5 shadow-xl backdrop-blur-2xl"
         >
           {memberships.map((membership) => (
             <SelectItem

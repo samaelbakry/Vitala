@@ -1,17 +1,40 @@
+
 import { Navigate, Outlet } from "react-router-dom";
 
-import { useMyMemberships } from "@/features/auth/hooks/useMyMemberships";
+import { useActiveClinic } from "@/features/clinic/hooks/useActiveClinic";
 import type { UserRole } from "../auth/types/role.type";
 
-interface RoleGuardProps { allowedRoles: UserRole[]}
+export default function RoleGuard({ allowedRoles}: { allowedRoles: UserRole[] }) {
+  const {
+    role,
+    hasActiveClinic,
+    isPending,
+    isError,
+  } = useActiveClinic();
 
-export default function RoleGuard({ allowedRoles }: RoleGuardProps) {
+  if (isPending) {
+    return (
+      <div className="flex min-h-[60vh] items-center justify-center">
+        <div className="h-8 w-8 animate-spin rounded-full border-2 border-brand-300/30 border-t-brand-700 dark:border-t-brand-300" />
+      </div>
+    );
+  }
 
-  const { data: memberships } = useMyMemberships();
+  if (isError) {
+    return (
+      <div className="flex min-h-[60vh] items-center justify-center">
+        <p className="text-sm text-muted-foreground">
+          Unable to verify your permissions. Please try again.
+        </p>
+      </div>
+    );
+  }
 
-  const hasPermission = memberships?.some((membership) => allowedRoles.includes(membership.role));
+  if (!hasActiveClinic) {
+    return <Navigate to="/no-access" replace />;
+  }
 
-  if (!hasPermission) {
+  if (!role || !allowedRoles.includes(role)) {
     return <Navigate to="/unauthorized" replace />;
   }
 

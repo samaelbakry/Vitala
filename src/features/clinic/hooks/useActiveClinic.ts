@@ -1,16 +1,9 @@
-
 import { useEffect } from "react";
 
-
-
-import {
-  setActiveClinic,
-  clearActiveClinic,
-} from "../clinicSlice";
+import { setActiveClinic, clearActiveClinic } from "../clinicSlice";
 import type { ClinicMembership } from "../types/clinic.type";
 import { useAppDispatch, useAppSelector } from "@/app/store";
 import { useMyMemberships } from "@/features/auth/hooks/useMyMemberships";
-
 
 const EMPTY_MEMBERSHIPS: ClinicMembership[] = [];
 
@@ -19,17 +12,13 @@ export function useActiveClinic() {
 
   const activeClinicId = useAppSelector((state) => state.clinic.activeClinicId);
 
-  const {
-    data,
-    isPending,
-    isError,
-    error,
-    refetch,
-  } = useMyMemberships();
+  const { data, isPending, isError, error, refetch } = useMyMemberships();
 
   const memberships = data ?? EMPTY_MEMBERSHIPS;
 
-  const selectedMembership = memberships.find((membership) => membership.clinic_id === activeClinicId);
+  const selectedMembership = memberships.find(
+    (membership) => membership.clinic_id === activeClinicId,
+  );
 
   // If no clinic was selected, use the first available clinic.
   const activeMembership = selectedMembership ?? memberships[0] ?? null;
@@ -51,12 +40,7 @@ export function useActiveClinic() {
     if (activeClinicId !== activeMembership.clinic_id) {
       dispatch(setActiveClinic(activeMembership.clinic_id));
     }
-  }, [
-    isPending,
-    activeClinicId,
-    activeMembership,
-    dispatch,
-  ]);
+  }, [isPending, activeClinicId, activeMembership, dispatch]);
 
   return {
     memberships,
