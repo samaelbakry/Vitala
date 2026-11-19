@@ -1,5 +1,5 @@
 import { supabase } from "@/lib/supabase";
-import type { ClinicMembership } from "../types/clinic.type";
+import type { Clinic, ClinicMembership, UpdateClinicData } from "../types/clinic.type";
 
 export async function getMyMemberships(userId: string): Promise<ClinicMembership[]> {
   const { data, error } = await supabase
@@ -42,4 +42,37 @@ export async function createClinic(name: string): Promise<string> {
   }
 
   return data;
+}
+
+export async function updateClinic(clinicId:string , values:UpdateClinicData):Promise<Clinic>{
+
+  const { data, error } = await supabase
+  .from("clinics")
+  .update({
+    name:values.name.trim(),
+    phone:values.phone,
+    logo_url:values.logo_url,
+    address:values.address,
+    specialty:values.specialty
+  })
+  .eq("id", clinicId)
+      .select(`
+      id,
+      name,
+      specialty,
+      phone,
+      address,
+      logo_url
+    `)
+    .single();
+
+  if (error) {
+    throw new Error(error.message);
+  }
+
+  if (!data) {
+    throw new Error("Failed to update clinic");
+  }
+
+  return data as Clinic;
 }

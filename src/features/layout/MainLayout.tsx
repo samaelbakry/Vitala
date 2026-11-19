@@ -13,6 +13,7 @@ import { supabase } from "../../lib/supabase";
 import { clearAuth } from "../auth/authSlice";
 import { clearActiveClinic } from "../clinic/clinicSlice";
 import ClinicSwitcher from "../clinic/components/ClinicSwitcher";
+import { useActiveClinic } from "../clinic/hooks/useActiveClinic";
 
 export default function MainLayout() {
   const dispatch = useAppDispatch();
@@ -24,6 +25,14 @@ export default function MainLayout() {
   const theme = useAppSelector((state) => state.ui.theme);
 
   const userInitial = user?.email?.charAt(0).toUpperCase() || "V";
+
+  const { role } = useActiveClinic();
+
+  const visibleNavigation = navigation.filter((item) => {
+    if (!item.allowedRoles) return true;
+
+    return role !== null && item.allowedRoles.includes(role);
+  });
 
   useEffect(() => {
     document.documentElement.classList.toggle("dark", theme === "dark");
@@ -77,7 +86,7 @@ export default function MainLayout() {
             </p>
           )}
 
-          {navigation.map((item) => {
+          {visibleNavigation.map((item) => {
             const Icon = item.icon;
 
             return (

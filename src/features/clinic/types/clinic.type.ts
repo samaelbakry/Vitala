@@ -1,9 +1,13 @@
 import type { MembershipStatus, UserRole } from "@/features/auth/types/role.type";
 
-export type Clinic = {
+export interface Clinic {
   id: string;
   name: string;
-};
+  specialty: string | null;
+  phone: string | null;
+  address: string | null;
+  logo_url: string | null;
+}
 
 export type ClinicMembership = {
   id: string;
@@ -14,3 +18,11 @@ export type ClinicMembership = {
   created_at: string;
   clinic: Clinic;
 };
+
+export type UpdateClinicData ={
+  name: string;
+  specialty: string | null;
+  phone: string | null;
+  address: string | null;
+  logo_url: string | null;
+}

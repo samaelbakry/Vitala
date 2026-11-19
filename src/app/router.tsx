@@ -3,6 +3,7 @@ import UnauthorizedPage from "@/components/shared/UnauthorizedPage";
 import Login from "@/features/auth/pages/Login";
 import Register from "@/features/auth/pages/Register";
 import type { UserRole } from "@/features/auth/types/role.type";
+import ClinicSettingsPage from "@/features/clinic/pages/ClinicSettingsPage";
 import CreateClinicPage from "@/features/clinic/pages/CreateClinicPage";
 import DashboardPage from "@/features/dashboard/pages/DashboardPage";
 import AuthLayout from "@/features/layout/AuthLayout";
@@ -104,6 +105,10 @@ export const router = createBrowserRouter([
                   {
                     path: "/staff",
                     element: <div>Staff Management Page</div>,
+                  },
+                  {
+                    path: "/clinic-settings",
+                    element: <ClinicSettingsPage />,
                   },
                 ],
               },
