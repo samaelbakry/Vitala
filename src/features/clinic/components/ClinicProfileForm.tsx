@@ -4,7 +4,15 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { toast } from "sonner";
-import { AlertCircle, Loader2, MapPin, Phone, Stethoscope } from "lucide-react";
+import {
+  AlertCircle,
+  Loader2,
+  MapPin,
+  Phone,
+  Stethoscope,
+  Building2,
+  CheckCircle2,
+} from "lucide-react";
 
 import { useUpdateClinic } from "../hooks/useUpdateClinic";
 import type { Clinic } from "../types/clinic.type";
@@ -22,8 +30,11 @@ const clinicSchema = z.object({
 
 type ClinicFormValues = z.infer<typeof clinicSchema>;
 
-
-export default function ClinicProfileForm({clinic}: {clinic:Clinic}) {
+export default function ClinicProfileForm({
+  clinic,
+}: {
+  clinic: Clinic;
+}) {
   const updateClinicMutation = useUpdateClinic();
 
   const {
@@ -40,8 +51,6 @@ export default function ClinicProfileForm({clinic}: {clinic:Clinic}) {
       address: clinic.address ?? "",
     },
   });
-
-  console.log(isDirty)
 
   useEffect(() => {
     reset({
@@ -71,115 +80,156 @@ export default function ClinicProfileForm({clinic}: {clinic:Clinic}) {
     }
   };
 
+  const inputClassName =
+    "h-11 rounded-xl border-border/70 bg-background/70 px-3.5 text-sm shadow-none transition-all placeholder:text-muted-foreground/60 hover:border-border focus-visible:border-brand-400 focus-visible:ring-4 focus-visible:ring-brand-400/10";
+
+  const iconClassName =
+    "h-4 w-4 text-brand-700/70 dark:text-brand-300/80";
+
   return (
- <form onSubmit={handleSubmit(onSubmit)} className="space-y-7">
-  <div className="grid gap-6 sm:grid-cols-2">
-    <div className="space-y-2 sm:col-span-2">
-      <div className="flex items-center justify-between">
-        <label
-          htmlFor="clinic-name"
-          className="text-sm font-medium text-foreground"
-        >
-          Clinic name
-        </label>
-        <span className="text-xs text-muted-foreground">Required</span>
+    <form onSubmit={handleSubmit(onSubmit)} className="space-y-7">
+      <div className="flex items-start gap-3 border-b border-border/60 pb-5">
+        <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-brand-100 text-brand-800 dark:bg-brand-500/10 dark:text-brand-300">
+          <Building2 size={20} />
+        </div>
+
+        <div>
+          <h3 className="text-base font-semibold text-foreground">
+            Clinic information
+          </h3>
+          <p className="mt-1 text-sm text-muted-foreground">
+            Update your clinic details and contact information.
+          </p>
+        </div>
       </div>
 
-      <Input
-        id="clinic-name"
-        placeholder="Enter clinic name"
-        aria-invalid={Boolean(errors.name)}
-        className={
-          errors.name
-            ? "border-destructive focus-visible:ring-destructive/30"
-            : "transition-colors"
-        }
-        {...register("name")}
-        disabled={updateClinicMutation.isPending}
-      />
+      <div className="grid gap-x-5 gap-y-6 sm:grid-cols-2">
+        <div className="space-y-2 sm:col-span-2">
+          <div className="flex items-center justify-between">
+            <label
+              htmlFor="clinic-name"
+              className="text-sm font-semibold text-foreground"
+            >
+              Clinic name
+            </label>
 
-      {errors.name && (
-        <p className="flex items-center gap-1.5 text-xs font-medium text-destructive">
-          <AlertCircle className="h-3.5 w-3.5 shrink-0" />
-          <span>{errors.name.message}</span>
-        </p>
-      )}
-    </div>
+            <span className="rounded-md bg-brand-100/70 px-2 py-1 text-[10px] font-semibold uppercase tracking-wide text-brand-800 dark:bg-brand-900/10 dark:text-brand-300">
+              Required
+            </span>
+          </div>
 
-    <div className="space-y-2">
-      <label
-        htmlFor="specialty"
-        className="flex items-center gap-1.5 text-sm font-medium text-foreground"
-      >
-        <Stethoscope className="h-3.5 w-3.5 text-muted-foreground" />
-        <span>Specialty</span>
-      </label>
+          <Input
+            id="clinic-name"
+            placeholder="Enter clinic name"
+            aria-invalid={Boolean(errors.name)}
+            className={`${inputClassName} ${
+              errors.name
+                ? "border-destructive focus-visible:ring-destructive/20"
+                : ""
+            }`}
+            {...register("name")}
+            disabled={updateClinicMutation.isPending}
+          />
 
-      <Input
-        id="specialty"
-        placeholder="e.g. General Medicine"
-        className="transition-colors"
-        {...register("specialty")}
-        disabled={updateClinicMutation.isPending}
-      />
-    </div>
+          {errors.name && (
+            <p className="flex items-center gap-1.5 text-xs font-medium text-destructive">
+              <AlertCircle className="h-3.5 w-3.5 shrink-0" />
+              <span>{errors.name.message}</span>
+            </p>
+          )}
+        </div>
 
-    <div className="space-y-2">
-      <label
-        htmlFor="clinic-phone"
-        className="flex items-center gap-1.5 text-sm font-medium text-foreground"
-      >
-        <Phone className="h-3.5 w-3.5 text-muted-foreground" />
-        <span>Phone number</span>
-      </label>
+        <div className="space-y-2">
+          <label
+            htmlFor="specialty"
+            className="flex items-center gap-2 text-sm font-semibold text-foreground"
+          >
+            <Stethoscope className={iconClassName} />
+            Specialty
+          </label>
 
-      <Input
-        id="clinic-phone"
-        placeholder="Enter phone number"
-        className="transition-colors"
-        {...register("phone")}
-        disabled={updateClinicMutation.isPending}
-      />
-    </div>
+          <Input
+            id="specialty"
+            placeholder="e.g. General Medicine"
+            className={inputClassName}
+            {...register("specialty")}
+            disabled={updateClinicMutation.isPending}
+          />
+        </div>
 
-    <div className="space-y-2 sm:col-span-2">
-      <label
-        htmlFor="clinic-address"
-        className="flex items-center gap-1.5 text-sm font-medium text-foreground"
-      >
-        <MapPin className="h-3.5 w-3.5 text-muted-foreground" />
-        <span>Address</span>
-      </label>
+        <div className="space-y-2">
+          <label
+            htmlFor="clinic-phone"
+            className="flex items-center gap-2 text-sm font-semibold text-foreground"
+          >
+            <Phone className={iconClassName} />
+            Phone number
+          </label>
 
-      <Textarea
-        id="clinic-address"
-        placeholder="Enter clinic address"
-        className="resize-y transition-colors"
-        {...register("address")}
-        disabled={updateClinicMutation.isPending}
-        rows={3}
-      />
-    </div>
-  </div>
+          <Input
+            id="clinic-phone"
+            placeholder="Enter phone number"
+            className={inputClassName}
+            {...register("phone")}
+            disabled={updateClinicMutation.isPending}
+          />
+        </div>
 
-  <div className="flex flex-col-reverse gap-3 border-t border-border/60 pt-5 sm:flex-row sm:items-center sm:justify-between">
-    <p className="text-xs text-muted-foreground">
-      {isDirty ? "You have unsaved changes." : "All changes are saved."}
-    </p>
+        <div className="space-y-2 sm:col-span-2">
+          <label
+            htmlFor="clinic-address"
+            className="flex items-center gap-2 text-sm font-semibold text-foreground"
+          >
+            <MapPin className={iconClassName} />
+            Address
+          </label>
 
-    <Button
-      type="submit"
-      disabled={!isDirty || updateClinicMutation.isPending}
-      className="min-w-32 gap-2"
-    >
-      {updateClinicMutation.isPending && (
-        <Loader2 className="h-4 w-4 animate-spin" />
-      )}
-      <span>
-        {updateClinicMutation.isPending ? "Saving..." : "Save changes"}
-      </span>
-    </Button>
-  </div>
-</form>
+          <Textarea
+            id="clinic-address"
+            placeholder="Enter your clinic's full address"
+            className="min-h-28 resize-y rounded-xl border-border/70 bg-background/70 px-3.5 py-3 text-sm shadow-none transition-all placeholder:text-muted-foreground/60 hover:border-border focus-visible:border-brand-400 focus-visible:ring-4 focus-visible:ring-brand-400/10"
+            {...register("address")}
+            disabled={updateClinicMutation.isPending}
+            rows={3}
+          />
+        </div>
+      </div>
+
+      <div className="flex flex-col-reverse gap-4 border-t border-border/60 pt-5 sm:flex-row sm:items-center sm:justify-between">
+        <div className="flex items-center gap-2">
+          {isDirty ? (
+            <>
+              <span className="h-2 w-2 rounded-full bg-amber-500" />
+              <p className="text-xs font-medium text-muted-foreground">
+                You have unsaved changes.
+              </p>
+            </>
+          ) : (
+            <>
+              <CheckCircle2 className="h-4 w-4 text-emerald-500" />
+              <p className="text-xs font-medium text-muted-foreground">
+                All changes are saved.
+              </p>
+            </>
+          )}
+        </div>
+
+        <Button
+          type="submit"
+          disabled={!isDirty || updateClinicMutation.isPending}
+          className="h-11 min-w-36 gap-2 rounded-xl bg-brand-800 px-5 font-semibold text-white shadow-sm transition-all hover:bg-brand-700 hover:shadow-md disabled:opacity-50 dark:bg-brand-300 dark:text-brand-950 dark:hover:bg-brand-200"
+        >
+          {updateClinicMutation.isPending && (
+            <Loader2 className="h-4 w-4 animate-spin" />
+          )}
+
+          <span>
+            {updateClinicMutation.isPending
+              ? "Saving..."
+              : "Save changes"}
+          </span>
+        </Button>
+      </div>
+    </form>
   );
 }

@@ -12,6 +12,7 @@ import MembershipGuard from "@/features/routes/MembershipGuard";
 import ProtectedRoute from "@/features/routes/ProtectedRoute";
 import PublicRoute from "@/features/routes/PublicRoute";
 import RoleGuard from "@/features/routes/RoleGuard";
+import StaffPage from "@/features/staff/pages/StaffPage";
 import { createBrowserRouter, Navigate } from "react-router-dom";
 
 const adminOnly: UserRole[] = ["admin"];
@@ -104,7 +105,7 @@ export const router = createBrowserRouter([
                 children: [
                   {
                     path: "/staff",
-                    element: <div>Staff Management Page</div>,
+                    element: <StaffPage/>
                   },
                   {
                     path: "/clinic-settings",
