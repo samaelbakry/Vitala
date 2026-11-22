@@ -12,6 +12,7 @@ import MembershipGuard from "@/features/routes/MembershipGuard";
 import ProtectedRoute from "@/features/routes/ProtectedRoute";
 import PublicRoute from "@/features/routes/PublicRoute";
 import RoleGuard from "@/features/routes/RoleGuard";
+import AcceptInvitationPage from "@/features/staff/pages/AcceptInvitationPage";
 import StaffPage from "@/features/staff/pages/StaffPage";
 import { createBrowserRouter, Navigate } from "react-router-dom";
 
@@ -53,6 +54,10 @@ export const router = createBrowserRouter([
       {
         path: "/onboarding",
         element: <CreateClinicPage />,
+      },
+      {
+        path: "/accept-invitation",
+        element: <AcceptInvitationPage />,
       },
       {
         element: <MembershipGuard />,
@@ -105,7 +110,7 @@ export const router = createBrowserRouter([
                 children: [
                   {
                     path: "/staff",
-                    element: <StaffPage/>
+                    element: <StaffPage />,
                   },
                   {
                     path: "/clinic-settings",

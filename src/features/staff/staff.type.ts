@@ -13,3 +13,18 @@ export type ClinicStaffMember = {
     avatar_url: string | null;
   } | null;
 }
+
+export type StaffInvitationRole = "doctor" | "receptionist";
+
+export type InviteStaffPayload ={
+  fullName: string;
+  email: string;
+  role: StaffInvitationRole;
+  clinicId: string;
+}
+
+export type InviteStaffResponse ={
+  success: boolean;
+  message: string;
+  invitationId: string;
+}

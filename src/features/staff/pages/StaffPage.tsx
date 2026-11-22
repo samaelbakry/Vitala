@@ -18,6 +18,7 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
+import InviteStaffTest from "../components/InviteStaffTest";
 
 const roleLabels: Record<UserRole, string> = {
   admin: "Admin",
@@ -225,7 +226,7 @@ export default function StaffPage() {
           </div>
         ) : (
           <div className="overflow-x-auto">
-            <Table className="w-full min-w-[650px]">
+            <Table className="w-full min-w-162.5">
               <TableHeader>
                 <TableRow className="border-b border-border/60 bg-muted/40 hover:bg-muted/40">
                   <TableHead className="h-12 px-6 text-xs font-semibold uppercase tracking-wider text-muted-foreground">
@@ -324,6 +325,7 @@ export default function StaffPage() {
           </div>
         )}
       </section>
+      <InviteStaffTest/>
     </div>
   );
 }
