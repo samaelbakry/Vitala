@@ -28,3 +28,18 @@ export type InviteStaffResponse ={
   message: string;
   invitationId: string;
 }
+
+export type InvitationStatusType =
+  | "pending"
+  | "accepted"
+  | "expired"
+  | "revoked";
+
+export interface ClinicInvitation {
+  id: string;
+  email: string;
+  role: StaffInvitationRole;
+  status: InvitationStatusType;
+  expires_at: string;
+  created_at: string;
+}

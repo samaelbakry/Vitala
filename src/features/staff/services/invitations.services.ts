@@ -1,5 +1,5 @@
 import { supabase } from "@/lib/supabase";
-import type { InviteStaffPayload, InviteStaffResponse } from "../staff.type";
+import type { ClinicInvitation, InviteStaffPayload, InviteStaffResponse } from "../staff.type";
 
 export async function inviteStaff(
   payload: InviteStaffPayload,
@@ -24,10 +24,7 @@ export async function inviteStaff(
   return data as InviteStaffResponse;
 }
 
-export async function acceptStaffInvitation(
-  invitationId: string,
-  token: string,
-): Promise<string> {
+export async function acceptStaffInvitation(invitationId: string,token: string): Promise<string> {
   const { data, error } = await supabase.rpc("accept_clinic_invitation", {
     _invitation_id: invitationId,
     _token: token,
@@ -42,4 +39,23 @@ export async function acceptStaffInvitation(
   }
 
   return data as string;
+}
+
+export async function getClinicInvitations(clinicId: string): Promise<ClinicInvitation[]> {
+  const { data, error } = await supabase.functions.invoke(
+    "get-clinic-invitations",
+    {
+      body: { clinicId },
+    },
+  );
+
+  if (error) {
+    throw new Error(error.message || "Failed to load invitations");
+  }
+
+  if (data?.error) {
+    throw new Error(data.error);
+  }
+
+  return (data?.invitations ?? []) as ClinicInvitation[];
 }
