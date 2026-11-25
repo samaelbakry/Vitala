@@ -1,10 +1,10 @@
 
 import { createClient } from "npm:@supabase/supabase-js@2";
 
+//Cross-Origin Resource Sharing
 const corsHeaders = {
   "Access-Control-Allow-Origin": "*",
-  "Access-Control-Allow-Headers":
-    "authorization, x-client-info, apikey, content-type",
+  "Access-Control-Allow-Headers":"authorization, x-client-info, apikey, content-type",
   "Access-Control-Allow-Methods": "POST, OPTIONS",
 };
 
@@ -17,6 +17,7 @@ const jsonResponse = (data: unknown, status = 200) =>
     },
   });
 
+//Generate Secure Token
 const generateToken = () => {
   const bytes = crypto.getRandomValues(new Uint8Array(32));
 
@@ -34,6 +35,7 @@ const hashToken = async (token: string) => {
   ).join("");
 };
 
+// Authentication vs Authorization
 Deno.serve(async (req) => {
   if (req.method === "OPTIONS") {
     return new Response("ok", { headers: corsHeaders });
@@ -61,6 +63,7 @@ Deno.serve(async (req) => {
       throw new Error("Missing required environment variables");
     }
 
+    // access token for user
     const jwt = authorization.slice(7);
 
     const userClient = createClient(supabaseUrl, anonKey, {
