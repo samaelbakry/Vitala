@@ -9,7 +9,7 @@ export default function ClinicSettingsPage() {
   if (isPending) {
     return (
       <div className="flex min-h-64 items-center justify-center">
-        <div className="h-8 w-8 animate-spin rounded-full border-2 border-brand-300/30 border-t-brand-700 dark:border-t-brand-300" />
+        <div className="h-8 w-8 animate-spin rounded-full border-2 border-primary/20 border-t-primary" />
       </div>
     );
   }
@@ -39,7 +39,7 @@ export default function ClinicSettingsPage() {
     <div className="mx-auto max-w-7xl space-y-8 pb-8">
       <div className="flex flex-col justify-between gap-4 sm:flex-row sm:items-center">
         <div>
-          <p className="mb-2 text-xs font-semibold tracking-[0.16em] text-brand-700 dark:text-brand-300">
+          <p className="mb-2 text-xs font-semibold tracking-[0.16em] text-primary">
             WORKSPACE MANAGEMENT
           </p>
 
@@ -53,7 +53,7 @@ export default function ClinicSettingsPage() {
         </div>
 
         <div className="flex items-center gap-3 rounded-xl border border-border/70 bg-card px-4 py-3 shadow-sm">
-          <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-brand-100 text-brand-800 dark:bg-brand-500/10 dark:text-brand-300">
+          <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-primary/10 text-primary">
             <Building2 size={19} />
           </div>
 

@@ -1,39 +1,43 @@
-
 import { Activity } from "lucide-react";
 
-interface LogoProps {
+type LogoProps = {
   light?: boolean;
-}
+  iconOnly?: boolean;
+};
 
-export default function Logo({ light = false }: LogoProps) {
+export default function Logo({ light = false, iconOnly = false }: LogoProps) {
   return (
     <div className="flex items-center gap-3">
       <span
-        className={`relative flex h-10 w-10 shrink-0 items-center justify-center overflow-hidden rounded-[14px] border ${
+        className={`relative flex h-10 w-10 shrink-0 items-center justify-center overflow-hidden rounded-[14px] border shadow-sm transition-colors duration-300 ${
           light
-            ? "border-brand-300/20 bg-brand-300/15 shadow-inner"
-            : "border-brand-300/30 bg-brand-100 shadow-sm dark:border-brand-300/20 dark:bg-brand-700/40"
+            ? "border-sidebar-border bg-sidebar-accent"
+            : "border-brand-300/40 bg-brand-100 dark:border-brand-700/50 dark:bg-brand-900/50"
         }`}
         aria-hidden="true"
       >
         <Activity
-          className={`h-[21px] w-[21px] ${
+          className={`h-5.25 w-5.25 ${
             light
-              ? "text-brand-300"
-              : "text-brand-800 dark:text-brand-100"
+              ? "text-sidebar-primary"
+              : "text-brand-900 dark:text-brand-100"
           }`}
           strokeWidth={1.7}
         />
       </span>
 
-      <span
-        className={`text-[21px] font-medium tracking-[-0.055em] ${
-          light ? "text-brand-100" : "text-brand-950 dark:text-brand-100"
-        }`}
-      >
-        Vitala
-        <span className="text-brand-300">.</span>
-      </span>
+      {!iconOnly && (
+        <span
+          className={`text-5.25 font-semibold tracking-[-0.055em] ${
+            light
+              ? "text-sidebar-foreground"
+              : "text-brand-950 dark:text-brand-100"
+          }`}
+        >
+          Vitala
+          <span className="text-brand-700 dark:text-brand-300">.</span>
+        </span>
+      )}
     </div>
   );
 }

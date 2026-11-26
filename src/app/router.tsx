@@ -8,6 +8,7 @@ import CreateClinicPage from "@/features/clinic/pages/CreateClinicPage";
 import DashboardPage from "@/features/dashboard/pages/DashboardPage";
 import AuthLayout from "@/features/layout/AuthLayout";
 import MainLayout from "@/features/layout/MainLayout";
+import PatientsPage from "@/features/patients/pages/PatientsPage";
 import MembershipGuard from "@/features/routes/MembershipGuard";
 import ProtectedRoute from "@/features/routes/ProtectedRoute";
 import PublicRoute from "@/features/routes/PublicRoute";
@@ -19,7 +20,7 @@ import { createBrowserRouter, Navigate } from "react-router-dom";
 const adminOnly: UserRole[] = ["admin"];
 const adminAndDoctor: UserRole[] = ["admin", "doctor"];
 const allRoles: UserRole[] = ["admin", "doctor", "receptionist"];
-const adminAndReceptionist: UserRole[] = ["admin", "receptionist"];
+// const adminAndReceptionist: UserRole[] = ["admin", "receptionist"];
 
 export const router = createBrowserRouter([
   {
@@ -79,11 +80,11 @@ export const router = createBrowserRouter([
                 ],
               },
               {
-                element: <RoleGuard allowedRoles={adminAndReceptionist} />,
+                element: <RoleGuard allowedRoles={allRoles} />,
                 children: [
                   {
                     path: "/patients",
-                    element: <div>patients Page</div>,
+                    element: <PatientsPage/>,
                   },
                   {
                     path: "/doctors",

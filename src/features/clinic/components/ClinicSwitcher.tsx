@@ -1,4 +1,3 @@
-
 import { Building2, Check } from "lucide-react";
 
 import { useAppDispatch } from "@/app/store";
@@ -31,13 +30,13 @@ export default function ClinicSwitcher({
 
   if (isPending) {
     return (
-      <div className="mx-3 my-4 space-y-3 rounded-2xl border border-white/10 bg-white/[0.04] p-3">
-        <div className="h-3 w-16 animate-pulse rounded bg-white/10" />
+      <div className="mx-3 my-4 space-y-3 rounded-2xl border border-sidebar-border bg-sidebar-accent/40 p-3">
+        <div className="h-3 w-16 animate-pulse rounded bg-muted" />
         <div className="flex items-center gap-3">
-          <div className="h-10 w-10 animate-pulse rounded-xl bg-white/10" />
+          <div className="h-10 w-10 animate-pulse rounded-xl bg-muted" />
           <div className="flex-1 space-y-2">
-            <div className="h-3 w-24 animate-pulse rounded bg-white/10" />
-            <div className="h-2.5 w-16 animate-pulse rounded bg-white/10" />
+            <div className="h-3 w-24 animate-pulse rounded bg-muted" />
+            <div className="h-2.5 w-16 animate-pulse rounded bg-muted" />
           </div>
         </div>
       </div>
@@ -57,7 +56,7 @@ export default function ClinicSwitcher({
       <div className="flex justify-center px-3 py-5">
         <div
           title={activeClinic.name}
-          className="group flex h-11 w-11 items-center justify-center rounded-xl border border-brand-300/20 bg-brand-300/10 text-brand-300 shadow-sm transition-all duration-200 hover:border-brand-300/40 hover:bg-brand-300/20 hover:shadow-brand-300/10"
+          className="group flex h-11 w-11 items-center justify-center rounded-xl border border-sidebar-border bg-sidebar-accent text-sidebar-primary shadow-sm transition-all duration-200 hover:border-brand-300/50 hover:bg-accent"
         >
           <Building2 size={20} strokeWidth={1.7} />
         </div>
@@ -68,11 +67,11 @@ export default function ClinicSwitcher({
   return (
     <div className="px-3 py-5">
       <div className="mb-3 flex items-center justify-between px-2">
-        <p className="text-[10px] font-semibold uppercase tracking-[0.18em] text-brand-300/60">
+        <p className="text-[10px] font-semibold uppercase tracking-[0.18em] text-muted-foreground">
           Workspace
         </p>
 
-        <span className="rounded-md border border-brand-300/15 bg-brand-300/10 px-2 py-0.5 text-[9px] font-medium tracking-wide text-brand-300/80">
+        <span className="rounded-md border border-brand-300/30 bg-brand-100 px-2 py-0.5 text-[9px] font-semibold tracking-wide text-brand-800 dark:border-brand-700/40 dark:bg-brand-900/50 dark:text-brand-300">
           ACTIVE
         </span>
       </div>
@@ -81,14 +80,14 @@ export default function ClinicSwitcher({
         value={activeClinic.name}
         onValueChange={handleClinicChange}
       >
-        <SelectTrigger className="group h-auto min-h-[68px] w-full rounded-2xl border border-white/10 bg-white/[0.045] px-3 py-3 text-brand-100 shadow-[inset_0_1px_0_rgba(255,255,255,0.04)] backdrop-blur-xl transition-all duration-200 hover:border-brand-300/30 hover:bg-white/[0.075] focus:ring-2 focus:ring-brand-300/20 focus:ring-offset-0 [&>svg]:text-brand-300/70">
+        <SelectTrigger className="group h-auto min-h-[68px] w-full rounded-2xl border border-sidebar-border bg-sidebar-accent/50 px-3 py-3 text-sidebar-foreground shadow-sm transition-all duration-200 hover:border-brand-300/50 hover:bg-sidebar-accent focus:ring-2 focus:ring-ring/30 focus:ring-offset-0 [&>svg]:text-muted-foreground">
           <div className="flex min-w-0 items-center gap-3">
-            <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl border border-brand-300/20 bg-gradient-to-br from-brand-300/20 to-brand-300/5 text-brand-300 shadow-inner transition-all duration-200 group-hover:border-brand-300/30 group-hover:from-brand-300/25">
+            <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl border border-brand-300/30 bg-brand-100 text-brand-800 shadow-sm transition-all duration-200 group-hover:bg-brand-100/70 dark:border-brand-700/40 dark:bg-brand-900/50 dark:text-brand-100">
               <Building2 size={19} strokeWidth={1.7} />
             </div>
 
             <div className="min-w-0 flex-1 text-left">
-              <span className="mb-1 block text-[10px] font-medium tracking-wide text-brand-300/60">
+              <span className="mb-1 block text-[10px] font-medium tracking-wide text-muted-foreground">
                 Active clinic
               </span>
 
@@ -99,9 +98,8 @@ export default function ClinicSwitcher({
 
         <SelectContent
           align="start"
-          // position="popper"
           sideOffset={8}
-          className="w-[var(--radix-select-trigger-width)] rounded-2xl border border-border/80 bg-popover/95 p-1.5 shadow-2xl backdrop-blur-2xl"
+          className="w-[var(--radix-select-trigger-width)] rounded-2xl border border-border bg-popover p-1.5 text-popover-foreground shadow-xl"
         >
           <div className="px-3 py-2">
             <p className="text-[10px] font-semibold uppercase tracking-[0.15em] text-muted-foreground">
@@ -113,10 +111,10 @@ export default function ClinicSwitcher({
             <SelectItem
               key={membership.id}
               value={membership.clinic.name}
-              className="mb-1 cursor-pointer rounded-xl py-3 pl-9 pr-3 focus:bg-accent"
+              className="mb-1 cursor-pointer rounded-xl py-3 pl-9 pr-3 focus:bg-accent focus:text-accent-foreground"
             >
               <div className="flex w-full min-w-0 items-center gap-3">
-                <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-brand-100 text-brand-800 dark:bg-brand-500/10 dark:text-brand-300">
+                <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg border border-brand-300/20 bg-brand-100 text-brand-800 dark:border-brand-700/40 dark:bg-brand-900/50 dark:text-brand-100">
                   <Building2 size={17} />
                 </div>
 
@@ -142,8 +140,8 @@ export default function ClinicSwitcher({
         </SelectContent>
       </Select>
 
-      <p className="mt-3 flex items-center gap-2 px-2 text-[10px] text-brand-300/40">
-        <span className="h-1.5 w-1.5 rounded-full bg-emerald-400" />
+      <p className="mt-3 flex items-center gap-2 px-2 text-[10px] text-muted-foreground">
+        <span className="h-1.5 w-1.5 rounded-full bg-emerald-500 dark:bg-emerald-400" />
         Switch between your clinics
       </p>
     </div>

@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
@@ -14,10 +13,10 @@ import { toast } from "sonner";
 import { useAppDispatch } from "../../../app/store";
 
 const inputClass =
-  "w-full border-0 border-b-2 border-[#E9DCE3] bg-transparent px-0 py-3 text-base text-[#35263A] placeholder:text-[#B09BAA] outline-none transition-colors focus:border-[#935073] focus-visible:border-[#935073]";
+  "w-full border-0 border-b-2 border-border bg-transparent px-0 py-3 text-base text-foreground placeholder:text-muted-foreground outline-none transition-colors focus:border-primary focus-visible:border-primary";
 
-const labelClass = "block text-sm font-medium text-brand-800";
-const errorClass = "mt-1.5 text-sm text-[#C75B68]";
+const labelClass = "block text-sm font-medium text-foreground";
+const errorClass = "mt-1.5 text-sm text-destructive";
 
 export default function Register() {
   const navigate = useNavigate();
@@ -62,11 +61,11 @@ export default function Register() {
 
   return (
     <div className="w-full max-w-md">
-      <h1 className="auth-display text-4xl font-bold text-brand-950">
+      <h1 className="auth-display text-4xl font-bold text-foreground">
         Create your account
       </h1>
 
-      <p className="mt-3 text-brand-700">
+      <p className="mt-3 text-muted-foreground">
         Set up Vitala for your clinic in a minute.
       </p>
 
@@ -135,7 +134,7 @@ export default function Register() {
                 type="button"
                 onClick={() => setShowPassword((v) => !v)}
                 aria-label={showPassword ? "Hide password" : "Show password"}
-                className="absolute right-0 top-1/2 -translate-y-1/2 rounded p-1 text-[#935073] transition-colors hover:text-brand-800 focus-visible:outline focus-visible:outline-[#935073]"
+                className="absolute right-0 top-1/2 -translate-y-1/2 rounded p-1 text-primary transition-colors hover:text-primary/80 focus-visible:outline focus-visible:outline-primary"
               >
                 {showPassword ? (
                   <EyeOff className="h-5 w-5" aria-hidden="true" />
@@ -174,17 +173,17 @@ export default function Register() {
         <button
           type="submit"
           disabled={isSubmitting}
-          className="w-full rounded-full bg-brand-800 py-3.5 font-semibold text-[#F8F4E9] transition-all hover:bg-brand-700 focus-visible:outline focus-visible:outline-offset-2 focus-visible:outline-[#935073] disabled:cursor-not-allowed disabled:opacity-50"
+          className="w-full rounded-full bg-primary py-3.5 font-semibold text-primary-foreground transition-all hover:bg-primary/90 focus-visible:outline focus-visible:outline-offset-2 focus-visible:outline-primary disabled:cursor-not-allowed disabled:opacity-50"
         >
           {isSubmitting ? "Creating account..." : "Create account"}
         </button>
       </form>
 
-      <p className="mt-8 text-sm text-[#806D7D]">
+      <p className="mt-8 text-sm text-muted-foreground">
         Already have an account?{" "}
         <Link
           to="/login"
-          className="font-semibold text-[#935073] underline-offset-4 transition-colors hover:text-brand-800 hover:underline"
+          className="font-semibold text-primary underline-offset-4 transition-colors hover:text-primary/80 hover:underline"
         >
           Sign in
         </Link>

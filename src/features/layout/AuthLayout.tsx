@@ -1,4 +1,3 @@
-
 import { Outlet } from "react-router-dom";
 import Logo from "../../components/ui/Logo";
 
@@ -28,7 +27,7 @@ const css = `
 
 export default function AuthLayout() {
   return (
-    <main className="auth-root flex min-h-screen bg-[#F8F4E9] text-[#35263A]">
+    <main className="auth-root flex min-h-screen bg-brand-100 text-brand-950">
       <style>{css}</style>
 
       <section className="flex flex-1 flex-col px-6 py-8 sm:px-12 lg:px-16">
@@ -55,7 +54,7 @@ export default function AuthLayout() {
         >
           <path
             d="M0 150 H170 L195 150 L215 90 L245 230 L275 40 L305 190 L325 150 H470 L490 150 L510 120 L530 175 L550 150 H800"
-            stroke="#F6DBC0"
+            stroke="var(--color-brand-300)"
             strokeWidth="3"
             strokeLinecap="round"
             strokeLinejoin="round"
@@ -64,18 +63,18 @@ export default function AuthLayout() {
 
           <path
             d="M0 150 H800"
-            stroke="#C49AAE"
+            stroke="var(--color-brand-300)"
             strokeOpacity="0.18"
             strokeWidth="1"
           />
         </svg>
 
         <div className="relative z-10 mt-auto max-w-lg p-12 xl:p-16">
-          <h2 className="auth-display text-4xl font-bold leading-[1.1] text-[#F8F4E9] xl:text-5xl">
+          <h2 className="auth-display text-4xl font-bold leading-[1.1] text-brand-100 xl:text-5xl">
             Every patient, every shift, in sync.
           </h2>
 
-          <p className="mt-5 max-w-md leading-7 text-[#C4AEBE]">
+          <p className="mt-5 max-w-md leading-7 text-brand-300">
             Appointments, records and your care team in one place, so your
             clinic runs as smoothly as it cares.
           </p>

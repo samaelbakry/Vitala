@@ -48,10 +48,12 @@ export default function CreateClinicPage() {
 
     onSuccess: async (clinicId) => {
       dispatch(setActiveClinic(clinicId));
+
       if (!userId) {
         toast.error("Unable to identify the current user.");
         return;
       }
+
       try {
         await queryClient.fetchQuery({
           queryKey: ["memberships", userId],
@@ -75,16 +77,16 @@ export default function CreateClinicPage() {
 
   return (
     <main className="relative flex min-h-screen items-center justify-center overflow-hidden bg-background px-4 py-10">
-      <div className="pointer-events-none absolute -left-32 -top-32 h-80 w-80 rounded-full bg-brand-300/15 blur-3xl" />
-      <div className="pointer-events-none absolute -bottom-32 -right-32 h-80 w-80 rounded-full bg-brand-700/10 blur-3xl" />
+      <div className="pointer-events-none absolute -left-32 -top-32 h-80 w-80 rounded-full bg-primary/10 blur-3xl" />
+      <div className="pointer-events-none absolute -bottom-32 -right-32 h-80 w-80 rounded-full bg-primary/5 blur-3xl" />
 
       <div className="relative w-full max-w-lg">
         <div className="mb-8 text-center">
-          <div className="mx-auto mb-5 flex h-16 w-16 items-center justify-center rounded-2xl border border-brand-300/30 bg-brand-100 text-brand-800 shadow-sm dark:bg-brand-700/30 dark:text-brand-100">
+          <div className="mx-auto mb-5 flex h-16 w-16 items-center justify-center rounded-2xl border border-primary/20 bg-primary/10 text-primary shadow-sm">
             <Building2 size={28} strokeWidth={1.6} />
           </div>
 
-          <p className="mb-2 text-sm font-medium tracking-wide text-brand-700 dark:text-brand-300">
+          <p className="mb-2 text-sm font-medium tracking-wide text-primary">
             WELCOME TO VITALA
           </p>
 
@@ -100,7 +102,7 @@ export default function CreateClinicPage() {
 
         <form
           onSubmit={handleSubmit(onSubmit)}
-          className="rounded-3xl border border-border/70 bg-card/70 p-6 shadow-xl shadow-brand-950/5 backdrop-blur-2xl sm:p-8"
+          className="rounded-3xl border border-border/70 bg-card/70 p-6 shadow-xl shadow-foreground/5 backdrop-blur-2xl sm:p-8"
         >
           <div className="mb-6">
             <label
@@ -125,12 +127,12 @@ export default function CreateClinicPage() {
             )}
           </div>
 
-          <div className="mb-6 rounded-xl border border-brand-300/20 bg-brand-100/40 p-4 dark:bg-brand-700/15">
-            <p className="text-sm font-medium text-brand-900 dark:text-brand-100">
+          <div className="mb-6 rounded-xl border border-primary/15 bg-primary/5 p-4">
+            <p className="text-sm font-medium text-foreground">
               You'll become the clinic administrator
             </p>
 
-            <p className="mt-1 text-xs leading-5 text-brand-800/75 dark:text-brand-100/70">
+            <p className="mt-1 text-xs leading-5 text-muted-foreground">
               You will be able to manage clinic settings, invite staff members,
               and control their access.
             </p>
@@ -139,7 +141,7 @@ export default function CreateClinicPage() {
           <Button
             type="submit"
             disabled={createClinicMutation.isPending}
-            className="h-12 w-full rounded-xl bg-brand-800 text-white hover:bg-brand-700 dark:bg-brand-300 dark:text-brand-950 dark:hover:bg-brand-100"
+            className="h-12 w-full rounded-xl bg-primary text-primary-foreground hover:bg-primary/90"
           >
             {createClinicMutation.isPending ? (
               <>

@@ -1,4 +1,3 @@
-
 import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -81,15 +80,14 @@ export default function ClinicProfileForm({
   };
 
   const inputClassName =
-    "h-11 rounded-xl border-border/70 bg-background/70 px-3.5 text-sm shadow-none transition-all placeholder:text-muted-foreground/60 hover:border-border focus-visible:border-brand-400 focus-visible:ring-4 focus-visible:ring-brand-400/10";
+    "h-11 rounded-xl border-border/70 bg-background/70 px-3.5 text-sm shadow-none transition-all placeholder:text-muted-foreground/60 hover:border-border focus-visible:border-ring focus-visible:ring-4 focus-visible:ring-ring/10";
 
-  const iconClassName =
-    "h-4 w-4 text-brand-700/70 dark:text-brand-300/80";
+  const iconClassName = "h-4 w-4 text-primary/70";
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="space-y-7">
       <div className="flex items-start gap-3 border-b border-border/60 pb-5">
-        <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-brand-100 text-brand-800 dark:bg-brand-500/10 dark:text-brand-300">
+        <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-primary/10 text-primary">
           <Building2 size={20} />
         </div>
 
@@ -113,7 +111,7 @@ export default function ClinicProfileForm({
               Clinic name
             </label>
 
-            <span className="rounded-md bg-brand-100/70 px-2 py-1 text-[10px] font-semibold uppercase tracking-wide text-brand-800 dark:bg-brand-900/10 dark:text-brand-300">
+            <span className="rounded-md bg-primary/10 px-2 py-1 text-[10px] font-semibold uppercase tracking-wide text-primary">
               Required
             </span>
           </div>
@@ -187,7 +185,7 @@ export default function ClinicProfileForm({
           <Textarea
             id="clinic-address"
             placeholder="Enter your clinic's full address"
-            className="min-h-28 resize-y rounded-xl border-border/70 bg-background/70 px-3.5 py-3 text-sm shadow-none transition-all placeholder:text-muted-foreground/60 hover:border-border focus-visible:border-brand-400 focus-visible:ring-4 focus-visible:ring-brand-400/10"
+            className="min-h-28 resize-y rounded-xl border-border/70 bg-background/70 px-3.5 py-3 text-sm shadow-none transition-all placeholder:text-muted-foreground/60 hover:border-border focus-visible:border-ring focus-visible:ring-4 focus-visible:ring-ring/10"
             {...register("address")}
             disabled={updateClinicMutation.isPending}
             rows={3}
@@ -217,7 +215,7 @@ export default function ClinicProfileForm({
         <Button
           type="submit"
           disabled={!isDirty || updateClinicMutation.isPending}
-          className="h-11 min-w-36 gap-2 rounded-xl bg-brand-800 px-5 font-semibold text-white shadow-sm transition-all hover:bg-brand-700 hover:shadow-md disabled:opacity-50 dark:bg-brand-300 dark:text-brand-950 dark:hover:bg-brand-200"
+          className="h-11 min-w-36 gap-2 rounded-xl bg-primary px-5 font-semibold text-primary-foreground shadow-sm transition-all hover:bg-primary/90 hover:shadow-md disabled:opacity-50"
         >
           {updateClinicMutation.isPending && (
             <Loader2 className="h-4 w-4 animate-spin" />
