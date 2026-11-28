@@ -25,7 +25,7 @@ export const navigation: NavigationItem[] = [
     label: "Patients",
     path: "/patients",
     icon: Users,
-    allowedRoles: ["admin", "receptionist"],
+     allowedRoles: ["admin", "doctor", "receptionist"],
   },
   {
     label: "Appointments",

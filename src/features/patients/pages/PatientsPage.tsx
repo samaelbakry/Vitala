@@ -4,6 +4,7 @@ import { AlertCircle, Search, UserRound, Users } from "lucide-react";
 import { usePatients } from "../hooks/usePatients";
 import { useActiveClinic } from "@/features/clinic/hooks/useActiveClinic";
 import AddPatientDialog from "../components/AddPatientDialog";
+import { Link } from "react-router-dom";
 
 export default function PatientsPage() {
   const [search, setSearch] = useState("");
@@ -214,9 +215,12 @@ export default function PatientsPage() {
                         </div>
 
                         <div className="min-w-0">
-                          <p className="text-sm font-semibold text-foreground">
+                          <Link
+                            to={`/patients/${patient.id}`}
+                            className="text-sm font-semibold text-foreground transition-colors hover:text-brand-700 dark:hover:text-brand-300"
+                          >
                             {patient.full_name || "Unnamed patient"}
-                          </p>
+                          </Link>
 
                           <p className="mt-0.5 text-xs text-muted-foreground">
                             Patient ID: {patient.id.slice(0, 8)}

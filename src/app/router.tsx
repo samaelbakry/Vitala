@@ -8,6 +8,7 @@ import CreateClinicPage from "@/features/clinic/pages/CreateClinicPage";
 import DashboardPage from "@/features/dashboard/pages/DashboardPage";
 import AuthLayout from "@/features/layout/AuthLayout";
 import MainLayout from "@/features/layout/MainLayout";
+import PatientDetailsPage from "@/features/patients/pages/PatientDetailsPage";
 import PatientsPage from "@/features/patients/pages/PatientsPage";
 import MembershipGuard from "@/features/routes/MembershipGuard";
 import ProtectedRoute from "@/features/routes/ProtectedRoute";
@@ -85,6 +86,10 @@ export const router = createBrowserRouter([
                   {
                     path: "/patients",
                     element: <PatientsPage/>,
+                  },
+                  {
+                    path: "/patients/:patientId",
+                    element: <PatientDetailsPage/>,
                   },
                   {
                     path: "/doctors",
